@@ -122,6 +122,7 @@ export default class ImageTool {
       buttonContent: config.buttonContent || '',
       uploader: config.uploader || undefined,
       actions: config.actions || [],
+      baseUrl: config.baseUrl || '',
     };
 
     /**
@@ -328,8 +329,8 @@ export default class ImageTool {
   set image(file) {
     this._data.file = file || {};
 
-    if (file && file.url) {
-      this.ui.fillImage(file.url);
+    if (file && (file.url || file.id)) {
+      this.ui.fillImage(file.url || this.config.baseUrl + "/" + file.id);
     }
   }
 
